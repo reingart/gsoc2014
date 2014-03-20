@@ -15,4 +15,10 @@ Deploy:
     /home/reingart/src/android-sdk-linux/platform-tools/adb -e install build/bin/QtApp-debug.apk
     /home/reingart/src/android-sdk-linux/platform-tools/adb -e logcat
 
-Tested with a "Nexus One" AVD Android 2.3.3, API Level 10, CPU/ABI ARM (armeabi)
+Tested with a "Nexus One" AVD Android 2.3.3, API Level 10, CPU/ABI ARM (armeabi).
+Screenshot captures:
+
+![](https://dl.dropboxusercontent.com/u/75600582/gsoc2014/android_screen.png)
+
+![](https://dl.dropboxusercontent.com/u/75600582/gsoc2014/android_app.png)
+
