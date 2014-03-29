@@ -175,6 +175,12 @@ public class QtActivity extends Activity
             QT_ANDROID_THEMES = new String[] {"Theme_DeviceDefault_Light"};
             QT_ANDROID_DEFAULT_THEME = "Theme_DeviceDefault_Light";
         }
+        try {
+            Log.d("SLEEP 5000", "waiting debugger");
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     // this function is used to load and start the loader
