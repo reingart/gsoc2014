@@ -26,7 +26,7 @@ Tested with a "Nexus One" AVD Android 2.3.3, API Level 10, CPU/ABI ARM (armeabi)
 
 wxQt Minimal hello world dialog sample running under android:
 
-![](https://mail-attachment.googleusercontent.com/attachment/u/0/?ui=2&ik=67e6ef997a&view=att&th=14507a6f03e588a5&attid=0.1&disp=safe&realattid=f_htb60k6x0&zw&saduie=AG9B_P8cRMRx973NZWcLA937-ar-&sadet=1396065693170&sads=cGFAlxqhecvi5RkG8YW-R-6OUwI&sadssc=1) 
+![](https://18366829875916615714.googlegroups.com/attach/f33f364ba1c0aa0d/wxQtAndroid.png?part=4&view=1&vt=ANaJVrHaA74Ip18Ze-R3TH_XVYP97aQzqUMiUVSIJtIq-XmfKM1wBD93acw3HhPpVmeLR6InzfjLDyK1D9yIFnu1nKcgEeY3bn39ilCyhIfV6IusfGlJs-I) 
 
 Old screenshot captures:
 
