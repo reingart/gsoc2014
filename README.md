@@ -23,7 +23,12 @@ Debug:
     ./gdb.sh
 
 Tested with a "Nexus One" AVD Android 2.3.3, API Level 10, CPU/ABI ARM (armeabi).
-Screenshot captures:
+
+wxQt Minimal hello world dialog sample running under android:
+
+![](https://mail-attachment.googleusercontent.com/attachment/u/0/?ui=2&ik=67e6ef997a&view=att&th=14507a6f03e588a5&attid=0.1&disp=safe&realattid=f_htb60k6x0&zw&saduie=AG9B_P8cRMRx973NZWcLA937-ar-&sadet=1396065693170&sads=cGFAlxqhecvi5RkG8YW-R-6OUwI&sadssc=1) 
+
+Old screenshot captures:
 
 ![](https://dl.dropboxusercontent.com/u/75600582/gsoc2014/android_screen.png)
 
