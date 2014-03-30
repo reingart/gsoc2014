@@ -5,12 +5,13 @@ Qt proof of concept app to experiment in cross-compiling [wxQT](http://wiki.wxwi
 
 Build instructions:
 
-    /home/reingart/qt/5.2.1/android_armv5/bin/qmake
+    export ANDROID_NDK_ROOT=/home/reingart/src/android-ndk-r9d
+    /home/reingart/qt/5.2.1/android_armv5/bin/qmake -makefile minimal.pro
     make install INSTALL_ROOT=android
     #/home/reingart/qt/5.2.1/android_armv5/bin/androiddeployqt --output android --android-platform android-10
     cd android
     ant debug
-
+ 
 
 Deploy:
 
