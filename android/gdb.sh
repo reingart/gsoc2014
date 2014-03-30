@@ -82,6 +82,8 @@ sleep 1
 echo "target remote :1234" > gdb.setup
 echo "file $APP_PROCESS" >> gdb.setup 
 echo -n "set solib-search-path $QT_ROOT/5.2.1/android_armv5/lib/:" >> gdb.setup
+echo -n "$QT_ROOT/5.2.1/android_armv5//plugins/platforms/:" >> gdb.setup
+echo -n "$QT_ROOT/5.2.1/android_armv5//plugins/platforms/android:" >> gdb.setup
 echo -n "$ANDROID_NDK_ROOT/platforms/android-10/arch-arm/usr/lib:" >> gdb.setup
 echo -n "/tmp/system_lib:" >> gdb.setup
 echo -n "/tmp/system_lib/hw:" >> gdb.setup  # this one for gralloc.default.so
