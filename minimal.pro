@@ -33,6 +33,7 @@ SOURCES += minimal.cpp
 HEADERS  +=
 
 CONFIG += mobility
+CONFIG += debug
 MOBILITY = 
 
 
