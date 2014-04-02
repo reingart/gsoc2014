@@ -1,7 +1,8 @@
 gsoc2014
 ========
 
-Qt proof of concept app to experiment in cross-compiling [wxQT](http://wiki.wxwidgets.org/WxQt) for Android
+Qt proof of concept app to experiment in cross-compiling [wxQT](http://wiki.wxwidgets.org/WxQt) for Android.
+For more info see the full [proposal for Google Summer of Code 2014](http://www.google-melange.com/gsoc/proposal/public/google/gsoc2014/reingart/5629499534213120)
 
 To compile wxQt for Qt5 and Android, look at this experimental branch with custom changes: https://github.com/reingart/wxWidgets/tree/wxQT
 See also the provisional [Configuration script](https://dl.dropboxusercontent.com/u/75600582/gsoc2014/wxQT/config.sh)
