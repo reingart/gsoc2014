@@ -34,6 +34,12 @@
 // resources
 // ----------------------------------------------------------------------------
 
+// the application icon (under Windows and OS/2 it is in resources and even
+// though we could still include the XPM here it would be unused)
+#if !defined(__WXMSW__) && !defined(__WXPM__)
+    ////#include "../sample.xpm"
+#endif
+
 // ----------------------------------------------------------------------------
 // private classes
 // ----------------------------------------------------------------------------
@@ -51,6 +57,75 @@ public:
     virtual bool OnInit();
 };
 
+class MyPanel: public wxPanel
+{
+public:
+    MyPanel(wxFrame *frame);
+    virtual ~MyPanel();
+
+    wxTextCtrl    *m_text;
+    wxButton      *m_button;
+
+    void OnButton(wxCommandEvent& event);
+
+private:
+    DECLARE_EVENT_TABLE()
+};
+
+// Define a new frame type: this is going to be our main frame
+class MyFrame : public wxFrame
+{
+public:
+    // ctor(s)
+    MyFrame(const wxString& title);
+
+    // event handlers (these functions should _not_ be virtual)
+    void OnQuit(wxCommandEvent& event);
+    void OnAbout(wxCommandEvent& event);
+
+private:
+    MyPanel *m_panel;
+    // any class wishing to process wxWidgets events must use this macro
+    DECLARE_EVENT_TABLE()
+};
+
+// ----------------------------------------------------------------------------
+// constants
+// ----------------------------------------------------------------------------
+
+// IDs for the controls and the menu commands
+enum
+{
+    // menu items
+    Minimal_Quit = wxID_EXIT,
+
+    // it is important for the id corresponding to the "About" command to have
+    // this standard value as otherwise it won't be handled properly under Mac
+    // (where it is special and put into the "Apple" menu)
+    Minimal_About = wxID_ABOUT,
+
+    Minimal_Button = wxID_HIGHEST,
+    Minimal_Text,
+};
+
+
+// ----------------------------------------------------------------------------
+// event tables and other macros for wxWidgets
+// ----------------------------------------------------------------------------
+
+// the event tables connect the wxWidgets events with the functions (event
+// handlers) which process them. It can be also done at run-time, but for the
+// simple menu events like this the static method is much simpler.
+BEGIN_EVENT_TABLE(MyFrame, wxFrame)
+    EVT_MENU(Minimal_Quit,  MyFrame::OnQuit)
+    EVT_MENU(Minimal_About, MyFrame::OnAbout)
+    EVT_BUTTON(Minimal_Quit,  MyFrame::OnQuit)
+    EVT_BUTTON(Minimal_About, MyFrame::OnAbout)
+END_EVENT_TABLE()
+
+BEGIN_EVENT_TABLE(MyPanel, wxPanel)
+    EVT_BUTTON(Minimal_Button,  MyPanel::OnButton)
+END_EVENT_TABLE()
 
 // Create a new application object: this macro will allow wxWidgets to create
 // the application object during program execution (it's better than using a
@@ -75,24 +150,12 @@ bool MyApp::OnInit()
     if ( !wxApp::OnInit() )
         return false;
 
-    wxMessageBox("Welcome to Android!",
-                     "wxWidgets minimal sample",
-                     wxOK | wxICON_INFORMATION
-                     );
-    wxMessageBox(wxString::Format
-                     (
-                        "Welcome to %s!\n"
-                        "\n"
-                        "This is the minimal wxWidgets sample\n"
-                        "running under %s.",
-                        wxVERSION_STRING,
-                        "Android!"
-                     ),
-                     "About wxWidgets minimal sample",
-                     wxOK | wxICON_INFORMATION
-                     );
+    // create the main application window
+    MyFrame *frame = new MyFrame("Minimal wxWidgets App");
 
-    //wxInfoMessageBox();
+    // and show it (the frames, unlike simple controls, are not shown when
+    // created initially)
+    frame->Show(true);
 
     // success: wxApp::OnRun() will be called which will enter the main message
     // loop and the application will run. If we returned false here, the
@@ -100,4 +163,98 @@ bool MyApp::OnInit()
     return true;
 }
 
+// ----------------------------------------------------------------------------
+// main frame
+// ----------------------------------------------------------------------------
+
+// frame constructor
+MyFrame::MyFrame(const wxString& title)
+       : wxFrame(NULL, wxID_ANY, title)
+{
+    // set the frame icon
+    ////SetIcon(wxICON(sample));
+
+#if wxUSE_MENUS
+    // create a menu bar
+    wxMenu *fileMenu = new wxMenu;
+
+    // the "About" item should be in the help menu
+    wxMenu *helpMenu = new wxMenu;
+    helpMenu->Append(Minimal_About, "&About...\tF1", "Show about dialog");
+
+    fileMenu->Append(Minimal_Quit, "E&xit\tAlt-X", "Quit this program");
+
+    // now append the freshly created menu to the menu bar...
+    wxMenuBar *menuBar = new wxMenuBar();
+    menuBar->Append(fileMenu, "&File");
+    menuBar->Append(helpMenu, "&Help");
+
+    // ... and attach this menu bar to the frame
+    SetMenuBar(menuBar);
+#endif // wxUSE_MENUS
+
+#if wxUSE_STATUSBAR
+    // create a status bar just for fun (by default with 1 pane only)
+    CreateStatusBar(2);
+    SetStatusText("Welcome to wxWidgets!");
+#endif // wxUSE_STATUSBAR
+
+    m_panel = new MyPanel(this);
+    SetSize(wxGetDisplaySize());
+}
+
+
+MyPanel::MyPanel( wxFrame *frame )
+       : wxPanel( frame, wxID_ANY )
+{
+    wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+    m_text = new wxTextCtrl(this, Minimal_Text, "text");
+    m_button = new wxButton(this, Minimal_Button, "&Platform");
+    wxButton *m_button1 = new wxButton(this, Minimal_About, "&About");
+    wxButton *m_button2 = new wxButton(this, Minimal_Quit, "&Quit");
+
+    sizer->Add(m_text, wxSizerFlags().Expand().Border());
+    sizer->AddSpacer(5);
+    sizer->Add(m_button, wxSizerFlags().Expand().Border());
+    sizer->AddSpacer(5);
+    sizer->Add(m_button1, wxSizerFlags().Expand().Border());
+    sizer->AddSpacer(5);
+    sizer->Add(m_button2, wxSizerFlags().Expand().Border());
+    sizer->Layout();
+    SetSizerAndFit(sizer);
+}
+
+// event handlers
+
+void MyFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
+{
+    // true is to force the frame to close
+    Close(true);
+}
+
+void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
+{
+    wxMessageBox(wxString::Format
+                 (
+                    "Welcome to %s!\n"
+                    "\n"
+                    "This is the minimal wxWidgets sample\n"
+                    "running under %s.",
+                    wxVERSION_STRING,
+                    wxGetOsDescription()
+                 ),
+                 "About wxWidgets minimal sample",
+                 wxOK | wxICON_INFORMATION,
+                 this);
+}
+
+void MyPanel::OnButton(wxCommandEvent& WXUNUSED(event))
+{
+    // Show wxWidgets information:
+    wxInfoMessageBox(this);
+}
+
+MyPanel::~MyPanel()
+{
+}
 
